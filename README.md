@@ -24,17 +24,16 @@ This project follows the **Medallion** pattern to keep ingest-through-consumptio
 
 When you apply Terraform, the **ADLS Gen2** module creates **one filesystem (container) per layer**:
 
+```text
 adls:
 ├─ bronze
 ├─ silver
 ├─ gold
 ├─ tmp
 └─ logs
+```
 
-There’s also a `synfs` container for the Synapse workspace itself.  
-> Containers are the isolation unit in ADLS Gen2 (stronger boundary than folders), which makes access control and lifecycle policies cleaner.
-
-By default, **no subfolder scaffolding** is created — that stays with your data jobs (Synapse pipelines/Spark notebooks), so the infra layer doesn’t guess your domain design. If you later want a standard tree (e.g., `year=YYYY/month=MM/day=DD`), you can add it in your ELT code or extend the storage module.
+By default, **no subfolder scaffolding** is created. That stays with your data jobs (Synapse pipelines/Spark notebooks), so the infra layer doesn’t guess your domain design. If you later want a standard tree (e.g., `year=YYYY/month=MM/day=DD`), you can add it in your ELT code or extend the storage module.
 
 #### How it maps to Synapse
 
