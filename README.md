@@ -44,24 +44,3 @@ A **modular Terraform project** that bakes in sane defaults and guardrails:
 
 ---
 
-### Quick start (dev)
-
-```bash
-# 0) Remote state (once)
-az login && az account set --subscription "<SUB_ID>"
-az group create -n iac-state-rg -l francecentral
-az storage account create -g iac-state-rg -n <uniqueSA> -l francecentral --sku Standard_LRS --kind StorageV2
-az storage container create --account-name <uniqueSA> -n tfstate --auth-mode login
-
-# 1) Init backend
-terraform init \
-  -backend-config="resource_group_name=iac-state-rg" \
-  -backend-config="storage_account_name=<uniqueSA>" \
-  -backend-config="container_name=tfstate" \
-  -backend-config="key=synapse-platform-dev.tfstate"
-
-# 2) Configure + apply
-export TF_VAR_synapse_sql_admin_password='Strong#Passw0rd!123'
-terraform workspace select dev || terraform workspace new dev
-terraform plan   -var-file=env/dev.tfvars -out plan-dev.tfplan
-terraform apply  "plan-dev.tfplan"
