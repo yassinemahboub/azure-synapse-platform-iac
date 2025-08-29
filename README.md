@@ -2,6 +2,9 @@
 
 I built this repo to stand up a **secure, tidy Azure Synapse data platform** for my side projects without getting lost in portal clicks or half-remembered DNS/RBAC settings. It’s pure **Terraform** (with optional Azure DevOps pipelines), so I can go from idea → working environment in minutes and recreate the same thing for dev, test, or prod without surprises.
 
+![Alt text](https://raw.githubusercontent.com/yassinemahboub/azure-synapse-platform-iac/refs/heads/main/assets/Terraform.png)
+
+
 ---
 
 ### The problem I wanted to solve
